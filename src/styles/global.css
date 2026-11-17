@@ -345,6 +345,19 @@ input:focus-visible {
   text-wrap: balance;
 }
 
+.hero .hero-logo-title {
+  width: min(790px, 69vw);
+  max-width: none;
+  line-height: 0;
+}
+
+.hero-logo-title img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.42));
+}
+
 .hero h1 em,
 .section h2 em,
 .format h2 em,
@@ -1710,6 +1723,10 @@ footer {
 
   .hero h1 {
     font-size: clamp(3.8rem, 18vw, 6rem);
+  }
+
+  .hero .hero-logo-title {
+    width: min(440px, 94vw);
   }
 
   .hero-actions {
