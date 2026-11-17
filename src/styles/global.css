@@ -81,6 +81,122 @@ input:focus-visible {
   transform: translateY(0);
 }
 
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(5, 105, 102, 0.48), transparent 34%),
+    var(--pine-deep);
+  animation: intro-exit 700ms 1.85s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.intro-screen::before,
+.intro-screen::after {
+  content: '';
+  position: absolute;
+  width: 42vw;
+  height: 42vw;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 50%;
+}
+
+.intro-screen::before {
+  top: -29vw;
+  left: -9vw;
+}
+
+.intro-screen::after {
+  right: -12vw;
+  bottom: -31vw;
+}
+
+.intro-mark {
+  position: relative;
+  width: min(520px, calc(100vw - 56px));
+  text-align: center;
+  animation: intro-mark-in 720ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-logo {
+  position: relative;
+  width: min(320px, 72vw);
+  margin-inline: auto;
+  padding: 12px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+}
+
+.intro-logo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.8) 50%, transparent 70%);
+  transform: translateX(-130%);
+  animation: intro-shine 650ms 780ms ease-out both;
+}
+
+.intro-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.intro-route {
+  display: block;
+  width: 100%;
+  height: 54px;
+  margin-top: 26px;
+  overflow: visible;
+}
+
+.intro-route path {
+  fill: none;
+  stroke: var(--ochre-light);
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  stroke-linecap: round;
+  stroke-width: 3;
+  animation: draw-route 800ms 520ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.intro-mark p {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 22px;
+  margin: 2px 0 0;
+  opacity: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  animation: intro-caption 450ms 1.08s ease-out forwards;
+}
+
+.intro-mark p span {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.intro-mark p span:first-child {
+  text-align: right;
+}
+
+.intro-mark p span:last-child {
+  text-align: left;
+}
+
+.intro-mark p b {
+  color: var(--ochre-light);
+  font-weight: 700;
+}
+
 .site-header {
   position: absolute;
   inset: 20px 24px auto;
@@ -96,6 +212,7 @@ input:focus-visible {
   background: rgba(8, 27, 24, 0.62);
   box-shadow: 0 14px 40px rgba(6, 26, 22, 0.16);
   backdrop-filter: blur(14px);
+  animation: header-enter 650ms 2.05s ease-out both;
 }
 
 .brand {
@@ -169,7 +286,7 @@ input:focus-visible {
   object-fit: cover;
   object-position: center;
   filter: saturate(0.9) contrast(1.03);
-  animation: hero-reveal 1.2s ease-out both;
+  animation: hero-reveal 1.2s 1.75s ease-out both;
 }
 
 .hero-shade {
@@ -190,7 +307,7 @@ input:focus-visible {
 
 .hero-copy {
   max-width: 850px;
-  animation: copy-reveal 800ms 150ms ease-out both;
+  animation: copy-reveal 800ms 2.05s ease-out both;
 }
 
 .eyebrow {
@@ -1218,6 +1335,34 @@ footer {
   to { opacity: 1; transform: scale(1); }
 }
 
+@keyframes intro-mark-in {
+  from { opacity: 0; transform: translateY(22px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes intro-shine {
+  to { transform: translateX(130%); }
+}
+
+@keyframes draw-route {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes intro-caption {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes intro-exit {
+  0% { transform: translateY(0); visibility: visible; }
+  100% { transform: translateY(-100%); visibility: hidden; }
+}
+
+@keyframes header-enter {
+  from { opacity: 0; transform: translateY(-18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes copy-reveal {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1299,6 +1444,12 @@ footer {
 
   .site-header {
     inset: 12px 12px auto;
+  }
+
+  .intro-mark p {
+    gap: 10px;
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
   }
 
   .brand {
@@ -1509,7 +1660,12 @@ footer {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .intro-screen {
+    display: none;
   }
 }
