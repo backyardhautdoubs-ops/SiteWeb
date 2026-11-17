@@ -24,3 +24,4 @@ Thumbs.db
 # Local browser previews
 .preview-profile*/
 preview-*.png
+.preview-artifacts/

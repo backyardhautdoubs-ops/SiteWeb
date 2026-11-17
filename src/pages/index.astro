@@ -1,6 +1,9 @@
 ---
 import '../styles/global.css';
 
+// Keep the draft rules out of the public page until they are ready.
+const rulesAvailable = false;
+
 const raceFacts = [
   { value: '6,706', unit: 'km', label: 'par boucle' },
   { value: '240', unit: 'm D+', label: 'par boucle' },
@@ -9,7 +12,7 @@ const raceFacts = [
 ];
 
 const loopSteps = [
-  { number: '01', title: 'Le signal', text: 'À chaque heure pile, tous les coureurs repartent ensemble depuis le corral.' },
+  { number: '01', title: 'Le signal', text: 'À chaque heure pile, tous les coureurs repartent ensemble depuis le sas de départ.' },
   { number: '02', title: 'La boucle', text: '6,706 km et 240 m D+ à parcourir intégralement en moins de soixante minutes.' },
   { number: '03', title: 'Le répit', text: 'Chaque minute gagnée sur la boucle devient du temps pour souffler, manger et repartir.' },
   { number: '04', title: 'Le dernier', text: 'Manquer le départ élimine. La course continue jusqu’à ce qu’il n’en reste plus qu’un.' }
@@ -17,10 +20,10 @@ const loopSteps = [
 
 const rules = [
   { title: 'Le parcours', text: 'Le parcours fait exactement 6 706 mètres (4,167 miles) avec 240 mètres de dénivelé positif par tour. Le tracé sera communiqué avant l’épreuve.' },
-  { title: 'Le départ', text: 'Chaque tour commence exactement une heure après le précédent. Trois signaux sonores sont donnés : 3 minutes, 2 minutes et 1 minute avant le départ. Tous les coureurs doivent être présents dans le corral au coup de sifflet.' },
-  { title: 'Délais et validation', text: 'Le coureur doit effectuer le tour complet en moins d’une heure. S’il n’est pas dans le corral au départ du tour suivant, il est éliminé (DNF).' },
+  { title: 'Le départ', text: 'Chaque tour commence exactement une heure après le précédent. Trois signaux sonores sont donnés : 3 minutes, 2 minutes et 1 minute avant le départ. Tous les coureurs doivent être présents dans le sas de départ au coup de sifflet.' },
+  { title: 'Délais et validation', text: 'Le coureur doit effectuer le tour complet en moins d’une heure. S’il n’est pas dans le sas de départ au départ du tour suivant, il est éliminé (DNF).' },
   { title: 'Assistance et équipement', text: 'L’assistance personnelle est uniquement autorisée dans la zone de ravitaillement entre les boucles. Aucune aide extérieure ni aucun pacer ne sont autorisés pendant la boucle.' },
-  { title: 'Le vainqueur', text: 'La course s’arrête lorsqu’il ne reste plus qu’un seul coureur capable d’accomplir seul une boucle complète. Si aucun coureur ne réussit le dernier tour, il n’y a aucun vainqueur.' },
+  { title: 'Le vainqueur', text: 'La course s’arrête lorsqu’il ne reste plus qu’un seul coureur capable d’accomplir seul une dernière boucle complète en moins d’une heure. Si aucun coureur ne réussit le dernier tour, il n’y a aucun vainqueur.' },
   { title: 'Esprit et sécurité', text: 'Matériel obligatoire : lampe frontale et réserve d’eau minimale. La convivialité et le respect de la nature du Haut-Doubs sont obligatoires.' }
 ];
 ---
@@ -35,80 +38,94 @@ const rules = [
     <meta property="og:title" content="Backyard du Haut-Doubs" />
     <meta property="og:description" content="Une boucle. Une heure. Jusqu’au dernier. Rendez-vous le 18 septembre 2027 à Gilley." />
     <meta property="og:image" content="/images/parcours-haut-doubs.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script is:inline>
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('backyard-intro-seen') && !location.hash) {
+          document.documentElement.dataset.intro = 'play';
+          sessionStorage.setItem('backyard-intro-seen', '1');
+        }
+      } catch { /* The page remains immediately available if storage is disabled. */ }
+    </script>
     <title>Backyard du Haut-Doubs — Gilley</title>
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
 
-    <div class="intro-screen" aria-hidden="true">
-      <div class="intro-mark">
-        <div class="intro-logo">
-          <img src="/images/logo-backyard-transparent.png" alt="" width="412" height="270" />
-          <svg class="intro-mountain-route" viewBox="0 0 412 270" role="presentation" preserveAspectRatio="xMidYMid meet">
-            <path class="route-glow" pathLength="1" d="M38 193 L139 128 L165 146 L205 99 C220 113 228 126 241 133 L285 159 L311 142 L382 187"></path>
-            <path class="route-stroke" pathLength="1" d="M38 193 L139 128 L165 146 L205 99 C220 113 228 126 241 133 L285 159 L311 142 L382 187"></path>
+    <div class="intro-screen">
+      <div class="intro-mark" aria-hidden="true">
+        <div class="intro-orbit">
+          <svg viewBox="0 0 320 320" class="intro-loop">
+            <circle class="intro-loop-track" cx="160" cy="160" r="148" />
+            <circle class="intro-loop-progress" cx="160" cy="160" r="148" pathLength="1" />
           </svg>
+          <img src="/images/logo-backyard-blanc.png" alt="" width="412" height="270" />
+          <span class="intro-lap">01 / ∞</span>
         </div>
-        <p><span>Gilley</span><b>La boucle commence ici</b><span>2027</span></p>
+        <p>Une boucle. <b>Tout commence.</b></p>
+        <span class="intro-location">Gilley · Haut-Doubs · 2027</span>
       </div>
+      <button type="button" class="intro-skip" data-skip-intro>Passer l’intro <span aria-hidden="true">↗</span></button>
     </div>
 
     <header class="site-header">
       <a class="brand" href="#accueil" aria-label="Backyard du Haut-Doubs — accueil">
         <img src="/images/logo-backyard-blanc.png" alt="" width="412" height="270" />
+        <span>Haut-Doubs<b>Gilley, France</b></span>
       </a>
-      <nav aria-label="Navigation principale">
+      <nav id="primary-navigation" aria-label="Navigation principale">
         <a href="#concept">Le concept</a>
-        <a href="#format">Le format</a>
-        <a href="#infos">Infos</a>
+        <a href="#format">Votre défi</a>
+        <a href="#infos">Infos pratiques</a>
+        <a href="#questions">FAQ</a>
       </nav>
       <button class="header-cta" type="button" data-open-registration>
         S’inscrire
         <span aria-hidden="true">↗</span>
       </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Ouvrir le menu"><span></span><span></span></button>
     </header>
 
     <main id="contenu">
       <section class="hero" id="accueil" aria-labelledby="hero-title">
-        <img class="hero-media" src="/images/parcours-haut-doubs.jpg" alt="Clairière et lisière de forêt sur le parcours à Gilley" fetchpriority="high" />
+        <img class="hero-media" src="/images/parcours-1600.webp" srcset="/images/parcours-640.webp 640w, /images/parcours-1024.webp 1024w, /images/parcours-1600.webp 1600w" sizes="100vw" alt="Clairière et lisière de forêt sur le parcours à Gilley" width="1600" height="900" fetchpriority="high" />
         <div class="hero-shade"></div>
+        <div class="hero-topline container" aria-hidden="true"><span>Le Haut-Doubs, sans ligne d’arrivée.</span><span>47°03′ N · 6°29′ E</span></div>
         <div class="hero-grid container">
           <div class="hero-copy">
-            <p class="eyebrow eyebrow-light"><span></span> 1ère édition · Gilley · 18.09.2027</p>
+            <p class="eyebrow eyebrow-light"><span></span> Backyard Ultra · Première édition</p>
+            <p class="hero-event-date"><time datetime="2027-09-18T06:00:00+02:00">18 septembre 2027</time><span>Gilley · 06:00</span></p>
             <h1 id="hero-title" class="hero-logo-title">
-              <img src="/images/logo-backyard-transparent.png" alt="Backyard du Haut-Doubs" width="412" height="270" />
+              <img src="/images/logo-backyard-clair.png" alt="Backyard du Haut-Doubs" width="412" height="270" />
             </h1>
-            <div class="hero-countdown">
-              <div class="hero-countdown-heading">
-                <span>Départ dans</span>
-                <small>18 septembre 2027 · 09:00</small>
-              </div>
-              <div class="countdown" aria-label="Compte à rebours avant le départ" aria-live="polite">
-                <div><strong id="days" data-countdown="days">000</strong><span>jours</span></div>
-                <div><strong id="hours" data-countdown="hours">00</strong><span>heures</span></div>
-                <div><strong id="minutes" data-countdown="minutes">00</strong><span>minutes</span></div>
-                <div><strong id="seconds" data-countdown="seconds">00</strong><span>secondes</span></div>
-              </div>
-            </div>
-            <p class="hero-lead">Une boucle. Une heure.<br />Jusqu’au dernier.</p>
+            <p class="hero-lead">Une boucle. Une heure.<br /><em>Jusqu’au dernier.</em></p>
+            <p class="hero-description">Les sapins pour décor. Le mental pour moteur.<br />Et toujours, une nouvelle raison de repartir.</p>
             <div class="hero-actions">
               <button class="button button-accent" type="button" data-open-registration>
                 Prendre le départ <span aria-hidden="true">↗</span>
               </button>
-              <button class="button button-ghost" type="button" data-open-rules>
-                Voir le règlement
-              </button>
-              <button class="button button-live" type="button" data-open-live>
-                <span class="live-dot" aria-hidden="true"></span>
-                Suivre la course en direct
-              </button>
+              <a class="button button-ghost" href="#concept">Découvrir le concept <span aria-hidden="true">↓</span></a>
             </div>
+            <p class="hero-registration-note">Inscriptions à venir · Préparez votre prochaine aventure.</p>
           </div>
-          <div class="hero-side">
-            <p>Première édition</p>
-            <strong>18</strong>
-            <p>Sept. 2027<br />Départ 09:00</p>
-          </div>
+          <aside class="race-pass" aria-label="Votre rendez-vous à Gilley">
+            <div class="pass-top"><span>Votre prochain départ</span><span class="edition-tag">Édition 01</span></div>
+            <div class="pass-date"><strong>18<span>.09</span></strong><span>2027</span></div>
+            <div class="pass-place"><span>Gilley, Haut-Doubs</span><span>Samedi · 06:00</span></div>
+            <div class="hero-countdown">
+              <p id="countdown-heading">Le premier départ approche</p>
+              <div class="countdown" role="timer" aria-label="Compte à rebours avant le départ" aria-live="off">
+                <div><strong id="days" data-countdown="days">—</strong><span>jours</span></div>
+                <div><strong id="hours" data-countdown="hours">—</strong><span>heures</span></div>
+                <div><strong id="minutes" data-countdown="minutes">—</strong><span>min</span></div>
+                <div><strong id="seconds" data-countdown="seconds">—</strong><span>sec</span></div>
+              </div>
+            </div>
+            <button class="pass-live" type="button" data-open-live><span class="status-dot" aria-hidden="true"></span> Le suivi de course <span aria-hidden="true">↗</span></button>
+          </aside>
         </div>
         <a class="scroll-cue" href="#concept">
           <span>Découvrir</span>
@@ -148,6 +165,7 @@ const rules = [
         </div>
 
         <div class="manifesto container">
+          <span class="manifesto-symbol" aria-hidden="true">∞</span>
           <p>Pas de ligne d’arrivée.</p>
           <p>Pas de distance annoncée.</p>
           <strong>Seulement la prochaine boucle.</strong>
@@ -157,7 +175,7 @@ const rules = [
       <section class="poster-story" aria-labelledby="poster-title">
         <div class="container poster-layout">
           <div class="poster-frame">
-            <img src="/images/affiche-officielle.jpg" alt="Affiche officielle de la première Backyard du Haut-Doubs" loading="lazy" />
+            <img src="/images/affiche-officielle.webp" alt="Affiche officielle de la première Backyard du Haut-Doubs" width="720" height="1000" loading="lazy" />
             <span>Affiche officielle · 2027</span>
           </div>
           <div class="poster-copy">
@@ -183,10 +201,14 @@ const rules = [
 
           <div class="race-tools">
             <div class="calculator-card">
-              <div>
+              <div class="calculator-heading">
+                <span class="calculator-symbol" aria-hidden="true">↻</span>
+                <div>
                 <p class="tool-label">Votre objectif</p>
                 <h3>Simulez votre course</h3>
+                </div>
               </div>
+              <p class="calculator-intro">Une boucle à la fois. Jusqu’où vous emmènera la prochaine ?</p>
               <label for="toursInput">Nombre de tours</label>
               <div class="range-row">
                 <input id="toursInput" type="range" min="1" max="100" value="12" />
@@ -194,9 +216,11 @@ const rules = [
               </div>
               <div class="results">
                 <div><strong id="resKm">80,47</strong><span>kilomètres</span></div>
-                <div><strong id="resDenivele">2 760</strong><span>mètres D+</span></div>
+                <div><strong id="resDenivele">2 880</strong><span>mètres D+</span></div>
                 <div><strong id="resHours">12</strong><span>heures</span></div>
               </div>
+              <div class="lap-presets" aria-label="Objectifs de course"><button type="button" data-laps="6" aria-pressed="false">6 tours</button><button type="button" data-laps="12" aria-pressed="true">12 tours</button><button type="button" data-laps="24" aria-pressed="false">24 tours · 100 miles</button></div>
+              <p class="calculator-note">240 m de dénivelé à chaque tour. Le défi du Haut-Doubs.</p>
             </div>
           </div>
         </div>
@@ -213,11 +237,19 @@ const rules = [
           </div>
 
           <div class="practical-grid">
+            <article class="info-card">
+              <span class="info-icon" aria-hidden="true">↗</span><p>Le rendez-vous</p><h3>18 septembre 2027</h3><p>Premier départ à 06:00.<br />Puis à chaque heure pile.</p>
+              <a href="/backyard-haut-doubs.ics" download>Ajouter à mon agenda <span aria-hidden="true">+</span></a>
+            </article>
+            <article class="info-card">
+              <span class="info-icon" aria-hidden="true">↻</span><p>Le terrain de jeu</p><h3>6,706 km · 240 m D+</h3><p>Sentiers, pâturages et forêts.<br />Le tracé sera communiqué avant l’épreuve.</p>
+              <a href="#format">Préparer mon objectif <span aria-hidden="true">→</span></a>
+            </article>
             <article class="info-card info-card-dark">
               <span class="info-icon" aria-hidden="true">◎</span>
               <p>Règlement officiel</p>
               <h3>Tout savoir avant de partir</h3>
-              <button type="button" data-open-rules>Consulter les 6 règles <span aria-hidden="true">→</span></button>
+              <button type="button" disabled={!rulesAvailable} data-open-rules={rulesAvailable ? '' : undefined}>{rulesAvailable ? 'Consulter le règlement' : 'Prochainement disponible'} <span aria-hidden="true">{rulesAvailable ? '→' : '…'}</span></button>
             </article>
           </div>
 
@@ -233,7 +265,7 @@ const rules = [
             </div>
             <div class="map-details">
               <p>Départ & arrivée</p>
-              <h3>Gymnase<br />de Gilley</h3>
+              <h3>Gymnase<br /> de Gilley</h3>
               <address>Rue de la Gare<br />25650 Gilley</address>
               <a href="https://www.google.com/maps/dir/?api=1&destination=47.05345%2C6.49163" target="_blank" rel="noreferrer">
                 Ouvrir l’itinéraire <span aria-hidden="true">↗</span>
@@ -243,20 +275,15 @@ const rules = [
         </div>
       </section>
 
-      <section class="partners" aria-labelledby="partners-title">
-        <div class="container partners-layout">
-          <div>
-            <p class="eyebrow"><span></span> À nos côtés</p>
-            <h2 id="partners-title">Nos partenaires</h2>
-            <p>Ils rendent l’aventure possible et font vivre le territoire.</p>
-          </div>
-          <div class="partners-grid">
-            <div class="partner partner-logo"><img src="/images/partenaire-gaby.jpg" alt="Le Tuyé du Papy Gaby" loading="lazy" /></div>
-            <div class="partner partner-logo"><img src="/images/partenaire-gilley.jpg" alt="Commune de Gilley" loading="lazy" /></div>
-            <div class="partner partner-logo partner-community">
-              <img src="/images/ccEntreDoubsEtLouee.png" alt="Communauté de communes Entre Doubs et Loue" loading="lazy" />
-            </div>
-            <div class="partner partner-name">Partenaire<br />local</div>
+      <section class="section faq" id="questions" aria-labelledby="faq-title">
+        <div class="container faq-layout">
+          <div><p class="eyebrow"><span></span> Avant le premier tour</p><h2 id="faq-title">Le départ,<br /><em>l’esprit libre.</em></h2><p>Une autre question ?<br /><a href="mailto:backyardhautdoubs@gmail.com">Écrivez à l’organisation <span aria-hidden="true">↗</span></a></p></div>
+          <div class="faq-list">
+            <details><summary>Comment s’inscrire ?<span aria-hidden="true">+</span></summary><p>La plateforme d’inscription n’est pas encore disponible. La date d’ouverture, les tarifs et les modalités seront annoncés ici. Pour toute question, contactez l’organisation à <a href="mailto:backyardhautdoubs@gmail.com">backyardhautdoubs@gmail.com</a>.</p></details>
+            <details><summary>Faut-il courir pendant 24 heures ?<span aria-hidden="true">+</span></summary><p>Non, il n’y a pas de distance minimale à viser ni de durée fixée à l’avance. Vous repartez tant que vous terminez chaque boucle en moins d’une heure et êtes présent au départ suivant. Votre objectif vous appartient.</p></details>
+            <details><summary>Comment se passent les pauses ?<span aria-hidden="true">+</span></summary><p>Le temps restant avant l’heure suivante est votre temps de récupération. Vous pouvez vous ravitailler et bénéficier de votre assistance dans la zone prévue, puis rejoindre le sas de départ avant le nouveau départ.</p></details>
+            <details><summary>Quand le parcours sera-t-il disponible ?<span aria-hidden="true">+</span></summary><p>Le tracé sera communiqué avant l’épreuve. La boucle annoncée mesure 6,706 km avec 240 mètres de dénivelé positif, au départ du Gymnase de Gilley.</p></details>
+            <details><summary>Comment rejoindre l’équipe bénévole ?<span aria-hidden="true">+</span></summary><p>Contactez-nous à <a href="mailto:backyardhautdoubs@gmail.com?subject=Devenir%20b%C3%A9n%C3%A9vole">backyardhautdoubs@gmail.com</a> en indiquant vos disponibilités. L’aventure se construit aussi de l’autre côté du ravitaillement !</p></details>
           </div>
         </div>
       </section>
@@ -283,7 +310,7 @@ const rules = [
         <p>Une boucle de 6,706 km.<br />Chaque heure. Jusqu’au dernier.</p>
         <div>
           <a href="mailto:backyardhautdoubs@gmail.com">Nous contacter</a>
-          <button type="button" data-open-rules>Règlement</button>
+          <button type="button" disabled={!rulesAvailable} data-open-rules={rulesAvailable ? '' : undefined}>{rulesAvailable ? 'Règlement' : 'Règlement · Prochainement disponible'}</button>
         </div>
       </div>
       <div class="container footer-bottom">
@@ -296,19 +323,18 @@ const rules = [
       <div class="live-dialog-inner">
         <button class="dialog-close" type="button" data-close-live aria-label="Fermer la fenêtre de suivi">×</button>
         <p class="live-kicker"><span></span><b id="waitKicker">Suivi de la course</b></p>
-        <h2 id="live-title">Encore un peu<br />de patience.</h2>
-        <p class="live-message" id="waitMessage">La vue en direct de la course sera disponible dans :</p>
-        <div class="countdown live-countdown" aria-label="Temps restant avant l’ouverture du suivi en direct" aria-live="polite">
-          <div><strong data-countdown="days">000</strong><span>jours</span></div>
-          <div><strong data-countdown="hours">00</strong><span>heures</span></div>
-          <div><strong data-countdown="minutes">00</strong><span>minutes</span></div>
-          <div><strong data-countdown="seconds">00</strong><span>secondes</span></div>
-        </div>
+        <h2 id="live-title">À chaque tour,<br /><em>on sera là.</em></h2>
+        <p class="live-message">Le suivi en direct n’est pas encore disponible. Rendez-vous ici pour les informations de suivi de la première édition, le 18 septembre 2027.</p>
         <button class="button button-accent live-dialog-action" type="button" data-close-live>Retour au site</button>
       </div>
     </dialog>
 
-    <dialog class="rules-dialog" id="rulesDialog" aria-labelledby="rules-title">
+    <dialog class="rules-dialog registration-dialog" id="registrationDialog" aria-labelledby="registration-title">
+      <div class="dialog-top"><p class="eyebrow"><span></span> Édition 01 · Gilley</p><button class="dialog-close" type="button" data-close-registration aria-label="Fermer les informations d’inscription">×</button></div>
+      <div class="registration-content"><span class="registration-symbol" aria-hidden="true">↗</span><h2 id="registration-title">Votre prochaine<br /><em>aventure arrive.</em></h2><p>Les inscriptions ne sont pas encore ouvertes. La date d’ouverture, les tarifs et le lien d’inscription seront annoncés sur ce site.</p><div class="registration-date"><span>Premier départ</span><strong>18 septembre 2027 · 06:00</strong></div><a class="button button-dark" href="mailto:backyardhautdoubs@gmail.com?subject=Informations%20inscription%20Backyard%202027">Contacter l’organisation <span aria-hidden="true">↗</span></a></div>
+    </dialog>
+
+    {rulesAvailable && <dialog class="rules-dialog" id="rulesDialog" aria-labelledby="rules-title">
       <div class="dialog-top">
         <div>
           <p class="eyebrow"><span></span> Avant de partir</p>
@@ -326,86 +352,10 @@ const rules = [
         ))}
       </div>
       <button class="button button-dark dialog-action" type="button" data-close-rules>J’ai compris</button>
-    </dialog>
+    </dialog>}
 
     <script>
-      const targetDate = new Date('2027-09-18T09:00:00+02:00').getTime();
-      const countdownElements = {
-        days: document.querySelectorAll<HTMLElement>('[data-countdown="days"]'),
-        hours: document.querySelectorAll<HTMLElement>('[data-countdown="hours"]'),
-        minutes: document.querySelectorAll<HTMLElement>('[data-countdown="minutes"]'),
-        seconds: document.querySelectorAll<HTMLElement>('[data-countdown="seconds"]')
-      };
-
-      function updateCountdown() {
-        const remaining = Math.max(0, targetDate - Date.now());
-        const days = Math.floor(remaining / 86_400_000);
-        const hours = Math.floor((remaining % 86_400_000) / 3_600_000);
-        const minutes = Math.floor((remaining % 3_600_000) / 60_000);
-        const seconds = Math.floor((remaining % 60_000) / 1_000);
-
-        countdownElements.days.forEach((element) => element.textContent = String(days).padStart(3, '0'));
-        countdownElements.hours.forEach((element) => element.textContent = String(hours).padStart(2, '0'));
-        countdownElements.minutes.forEach((element) => element.textContent = String(minutes).padStart(2, '0'));
-        countdownElements.seconds.forEach((element) => element.textContent = String(seconds).padStart(2, '0'));
-      }
-
-      updateCountdown();
-      window.setInterval(updateCountdown, 1000);
-
-      const toursInput = document.querySelector<HTMLInputElement>('#toursInput');
-      const resTours = document.querySelector<HTMLOutputElement>('#resTours');
-      const resKm = document.querySelector('#resKm');
-      const resDenivele = document.querySelector('#resDenivele');
-      const resHours = document.querySelector('#resHours');
-      const numberFormat = new Intl.NumberFormat('fr-FR');
-      const decimalFormat = new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-      function updateCalculator() {
-        const tours = Number(toursInput?.value ?? 0);
-        if (resTours) resTours.textContent = String(tours);
-        if (resKm) resKm.textContent = decimalFormat.format(tours * 6.706);
-        if (resDenivele) resDenivele.textContent = numberFormat.format(tours * 240);
-        if (resHours) resHours.textContent = String(tours);
-      }
-
-      toursInput?.addEventListener('input', updateCalculator);
-      updateCalculator();
-
-      const dialog = document.querySelector<HTMLDialogElement>('#rulesDialog');
-      document.querySelectorAll<HTMLElement>('[data-open-rules]').forEach((button) => {
-        button.addEventListener('click', () => dialog?.showModal());
-      });
-      document.querySelectorAll<HTMLElement>('[data-close-rules]').forEach((button) => {
-        button.addEventListener('click', () => dialog?.close());
-      });
-      dialog?.addEventListener('click', (event) => {
-        if (event.target === dialog) dialog.close();
-      });
-
-      const liveDialog = document.querySelector<HTMLDialogElement>('#liveDialog');
-      const waitKicker = document.querySelector('#waitKicker');
-      const waitMessage = document.querySelector('#waitMessage');
-      document.querySelectorAll<HTMLElement>('[data-open-live]').forEach((button) => {
-        button.addEventListener('click', () => {
-          if (waitKicker) waitKicker.textContent = 'Suivi de la course';
-          if (waitMessage) waitMessage.textContent = 'La vue en direct de la course sera disponible dans :';
-          liveDialog?.showModal();
-        });
-      });
-      document.querySelectorAll<HTMLElement>('[data-open-registration]').forEach((button) => {
-        button.addEventListener('click', () => {
-          if (waitKicker) waitKicker.textContent = 'Inscriptions';
-          if (waitMessage) waitMessage.textContent = 'Le site d’inscription sera disponible dans :';
-          liveDialog?.showModal();
-        });
-      });
-      document.querySelectorAll<HTMLElement>('[data-close-live]').forEach((button) => {
-        button.addEventListener('click', () => liveDialog?.close());
-      });
-      liveDialog?.addEventListener('click', (event) => {
-        if (event.target === liveDialog) liveDialog.close();
-      });
+      import '../scripts/site';
     </script>
   </body>
 </html>

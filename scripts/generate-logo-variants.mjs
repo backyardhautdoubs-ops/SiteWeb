@@ -43,6 +43,7 @@ function createVariant(mode) {
 
     let color;
     if (mode === 'white') color = palette.white;
+    else if (mode === 'light') color = isOchre ? palette.ochre : palette.white;
     else if (mode === 'gray') color = isOchre ? palette.gray : palette.charcoal;
     else color = isOchre ? palette.ochre : palette.teal;
 
@@ -60,7 +61,8 @@ function createVariant(mode) {
 await Promise.all([
   createVariant('color').png().toFile(output('logo-backyard-transparent.png')),
   createVariant('white').png().toFile(output('logo-backyard-blanc.png')),
+  createVariant('light').png().toFile(output('logo-backyard-clair.png')),
   createVariant('gray').png().toFile(output('logo-backyard-gris.png'))
 ]);
 
-console.log(`Generated 3 transparent logo variants at ${info.width * 4}×${info.height * 4}px.`);
+console.log(`Generated 4 transparent logo variants at ${info.width * 4}×${info.height * 4}px.`);

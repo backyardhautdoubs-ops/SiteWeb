@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Backyard du Haut-Doubs//Edition 2027//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:backyard-haut-doubs-20270918@gmail.com
+DTSTAMP:20261117T120000Z
+DTSTART:20270918T040000Z
+SUMMARY:Backyard du Haut-Doubs — Premier départ
+LOCATION:Gymnase de Gilley\, Rue de la Gare\, 25650 Gilley\, France
+DESCRIPTION:Premier départ à 06:00 (heure de Paris). Une boucle de
+  6\,706 km et 240 m D+ chaque heure. Jusqu’au dernier coureur.
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
