@@ -124,28 +124,21 @@ input:focus-visible {
 
 .intro-logo {
   position: relative;
-  width: min(320px, 72vw);
+  width: min(350px, 76vw);
   margin-inline: auto;
-  padding: 12px;
-  overflow: hidden;
-  border-radius: 8px;
-  background: var(--white);
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+  padding: 0;
+  background: transparent;
 }
 
 .intro-logo::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.8) 50%, transparent 70%);
-  transform: translateX(-130%);
-  animation: intro-shine 650ms 780ms ease-out both;
+  display: none;
 }
 
 .intro-logo img {
   display: block;
   width: 100%;
   height: auto;
+  filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.28));
 }
 
 .intro-route {
@@ -217,17 +210,17 @@ input:focus-visible {
 
 .brand {
   display: flex;
-  width: 82px;
-  height: 50px;
+  width: 92px;
+  height: 54px;
   overflow: hidden;
-  border-radius: 6px;
-  background: var(--white);
+  background: transparent;
 }
 
 .brand img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.28));
 }
 
 .site-header nav {
@@ -260,8 +253,10 @@ input:focus-visible {
   gap: 14px;
   padding: 12px 16px;
   border-radius: 7px;
+  border: 0;
   color: var(--pine-deep);
   background: var(--ochre-light);
+  cursor: pointer;
 }
 
 .hero {
@@ -359,7 +354,7 @@ input:focus-visible {
 }
 
 .hero-lead {
-  margin: 26px 0 32px;
+  margin: 20px 0 26px;
   color: rgba(255, 255, 255, 0.88);
   font-family: var(--display);
   font-size: clamp(1.35rem, 2vw, 1.85rem);
@@ -367,6 +362,53 @@ input:focus-visible {
   letter-spacing: 0.02em;
   line-height: 1.3;
   text-transform: uppercase;
+}
+
+.hero-countdown {
+  display: grid;
+  grid-template-columns: auto minmax(390px, 1fr);
+  align-items: center;
+  gap: 26px;
+  width: min(720px, 100%);
+  margin-top: 28px;
+  padding: 16px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9px;
+  background: rgba(5, 39, 34, 0.62);
+  backdrop-filter: blur(12px);
+}
+
+.hero-countdown-heading span,
+.hero-countdown-heading small {
+  display: block;
+}
+
+.hero-countdown-heading span {
+  color: var(--ochre-light);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-countdown-heading small {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.hero-countdown .countdown > div {
+  padding-inline: 14px;
+}
+
+.hero-countdown .countdown strong {
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+.hero-countdown .countdown span {
+  margin-top: 5px;
+  font-size: 0.58rem;
 }
 
 .hero-actions {
@@ -411,6 +453,25 @@ input:focus-visible {
 
 .button-ghost:hover {
   background: rgba(255, 255, 255, 0.14);
+}
+
+.button-live {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--teal);
+}
+
+.button-live:hover {
+  background: #07807c;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff775f;
+  box-shadow: 0 0 0 0 rgba(255, 119, 95, 0.55);
+  animation: live-pulse 1.8s ease-out infinite;
 }
 
 .button-dark {
@@ -1074,6 +1135,88 @@ input:focus-visible {
   cursor: pointer;
 }
 
+.map-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.35fr);
+  min-height: 430px;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 10px;
+  color: var(--white);
+  background: var(--pine-deep);
+  box-shadow: 0 26px 65px rgba(9, 42, 39, 0.14);
+}
+
+.map-frame {
+  position: relative;
+  min-height: 430px;
+  background: #d8ddd7;
+}
+
+.map-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(0.82) contrast(1.03);
+}
+
+.map-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 42px 36px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(5, 105, 102, 0.52), transparent 48%),
+    var(--pine-deep);
+}
+
+.map-details > p {
+  margin: 0 0 18px;
+  color: var(--ochre-light);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.map-details h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 3.4vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.map-details address {
+  margin: 22px 0 34px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.9rem;
+  font-style: normal;
+  line-height: 1.7;
+}
+
+.map-details a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.map-details a span {
+  color: var(--ochre-light);
+  font-size: 1.15rem;
+}
+
 .partners {
   padding-block: 95px;
   border-top: 1px solid var(--line);
@@ -1123,6 +1266,12 @@ input:focus-visible {
   mix-blend-mode: multiply;
 }
 
+.partner-community img {
+  width: 100%;
+  max-height: 132px;
+  transform: scale(1.14);
+}
+
 .partner-name {
   color: var(--muted);
   font-family: var(--display);
@@ -1156,12 +1305,16 @@ input:focus-visible {
   width: 210px;
   height: 210px;
   padding: 32px;
+  border: 0;
   border-radius: 50%;
   color: var(--pine-deep);
   background: var(--ochre-light);
   font-weight: 700;
+  font-family: var(--body);
   line-height: 1.25;
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
   transition: transform 250ms ease, background 250ms ease;
 }
 
@@ -1199,6 +1352,7 @@ footer {
   display: block;
   width: 100%;
   height: auto;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.22));
 }
 
 .footer-grid p {
@@ -1248,6 +1402,75 @@ footer {
 .rules-dialog::backdrop {
   background: rgba(3, 20, 17, 0.8);
   backdrop-filter: blur(6px);
+}
+
+.live-dialog {
+  width: min(720px, calc(100vw - 32px));
+  overflow: hidden;
+  color: var(--white);
+  background: var(--pine-deep);
+}
+
+.live-dialog-inner {
+  position: relative;
+  padding: 54px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(5, 105, 102, 0.7), transparent 46%),
+    repeating-linear-gradient(120deg, transparent 0 48px, rgba(255, 255, 255, 0.025) 49px 50px);
+}
+
+.live-dialog .dialog-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+}
+
+.live-kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 22px;
+  color: var(--ochre-light);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.live-kicker span {
+  width: 34px;
+  height: 2px;
+  background: currentColor;
+}
+
+.live-kicker b {
+  font-weight: 700;
+}
+
+.live-dialog h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 5.3rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+.live-message {
+  margin: 26px 0 30px;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.live-countdown {
+  padding: 24px 0;
+  border-block: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.live-dialog-action {
+  margin-top: 30px;
 }
 
 .dialog-top {
@@ -1363,6 +1586,11 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes live-pulse {
+  70% { box-shadow: 0 0 0 9px rgba(255, 119, 95, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 119, 95, 0); }
+}
+
 @keyframes copy-reveal {
   from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1463,7 +1691,7 @@ footer {
   }
 
   .hero {
-    min-height: 700px;
+    min-height: 980px;
   }
 
   .hero-media {
@@ -1491,6 +1719,24 @@ footer {
 
   .hero-actions .button {
     width: 100%;
+  }
+
+  .hero-countdown {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 16px;
+  }
+
+  .hero-countdown-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .hero-countdown-heading small {
+    margin-top: 0;
   }
 
   .scroll-cue {
@@ -1596,6 +1842,18 @@ footer {
     grid-column: auto;
   }
 
+  .map-card {
+    grid-template-columns: 1fr;
+  }
+
+  .map-frame {
+    min-height: 340px;
+  }
+
+  .map-details {
+    padding: 34px 26px;
+  }
+
   .partners-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1648,6 +1906,19 @@ footer {
   .dialog-action {
     width: calc(100% - 44px);
     margin: 20px 22px 28px;
+  }
+
+  .live-dialog-inner {
+    padding: 44px 22px 30px;
+  }
+
+  .live-dialog .dialog-close {
+    top: 14px;
+    right: 14px;
+  }
+
+  .live-countdown > div {
+    padding-inline: 7px;
   }
 }
 

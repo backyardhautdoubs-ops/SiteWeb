@@ -43,7 +43,7 @@ const rules = [
     <div class="intro-screen" aria-hidden="true">
       <div class="intro-mark">
         <div class="intro-logo">
-          <img src="/images/logo-backyard.jpg" alt="" width="320" height="186" />
+          <img src="/images/logo-backyard-transparent.png" alt="" width="412" height="270" />
         </div>
         <svg class="intro-route" viewBox="0 0 420 54" role="presentation">
           <path d="M4 42C70 6 126 52 190 22S304 5 416 34"></path>
@@ -54,17 +54,17 @@ const rules = [
 
     <header class="site-header">
       <a class="brand" href="#accueil" aria-label="Backyard du Haut-Doubs — accueil">
-        <img src="/images/logo-backyard.jpg" alt="" width="160" height="93" />
+        <img src="/images/logo-backyard-blanc.png" alt="" width="412" height="270" />
       </a>
       <nav aria-label="Navigation principale">
         <a href="#concept">Le concept</a>
         <a href="#format">Le format</a>
         <a href="#infos">Infos</a>
       </nav>
-      <a class="header-cta" href="https://votre-plateforme-d-inscription.fr" target="_blank" rel="noreferrer">
+      <button class="header-cta" type="button" data-open-registration>
         S’inscrire
         <span aria-hidden="true">↗</span>
-      </a>
+      </button>
     </header>
 
     <main id="contenu">
@@ -75,13 +75,29 @@ const rules = [
           <div class="hero-copy">
             <p class="eyebrow eyebrow-light"><span></span> 1ère édition · Gilley · 18.09.2027</p>
             <h1 id="hero-title">Backyard<br /><em>du Haut-Doubs</em></h1>
+            <div class="hero-countdown">
+              <div class="hero-countdown-heading">
+                <span>Départ dans</span>
+                <small>18 septembre 2027 · 09:00</small>
+              </div>
+              <div class="countdown" aria-label="Compte à rebours avant le départ" aria-live="polite">
+                <div><strong id="days" data-countdown="days">000</strong><span>jours</span></div>
+                <div><strong id="hours" data-countdown="hours">00</strong><span>heures</span></div>
+                <div><strong id="minutes" data-countdown="minutes">00</strong><span>minutes</span></div>
+                <div><strong id="seconds" data-countdown="seconds">00</strong><span>secondes</span></div>
+              </div>
+            </div>
             <p class="hero-lead">Une boucle. Une heure.<br />Jusqu’au dernier.</p>
             <div class="hero-actions">
-              <a class="button button-accent" href="https://votre-plateforme-d-inscription.fr" target="_blank" rel="noreferrer">
+              <button class="button button-accent" type="button" data-open-registration>
                 Prendre le départ <span aria-hidden="true">↗</span>
-              </a>
+              </button>
               <button class="button button-ghost" type="button" data-open-rules>
                 Voir le règlement
+              </button>
+              <button class="button button-live" type="button" data-open-live>
+                <span class="live-dot" aria-hidden="true"></span>
+                Suivre la course en direct
               </button>
             </div>
           </div>
@@ -163,19 +179,6 @@ const rules = [
           </div>
 
           <div class="race-tools">
-            <div class="countdown-card">
-              <div class="card-heading">
-                <p>Prochain départ</p>
-                <span>18 septembre 2027 · 09:00</span>
-              </div>
-              <div class="countdown" aria-label="Compte à rebours avant le départ" aria-live="polite">
-                <div><strong id="days">000</strong><span>jours</span></div>
-                <div><strong id="hours">00</strong><span>heures</span></div>
-                <div><strong id="minutes">00</strong><span>minutes</span></div>
-                <div><strong id="seconds">00</strong><span>secondes</span></div>
-              </div>
-            </div>
-
             <div class="calculator-card">
               <div>
                 <p class="tool-label">Votre objectif</p>
@@ -226,6 +229,26 @@ const rules = [
               <button type="button" data-open-rules>Consulter les 6 règles <span aria-hidden="true">→</span></button>
             </article>
           </div>
+
+          <div class="map-card">
+            <div class="map-frame">
+              <iframe
+                title="Carte Google Maps du Gymnase de Gilley"
+                src="https://www.google.com/maps?q=47.05345%2C6.49163&z=16&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="map-details">
+              <p>Départ & arrivée</p>
+              <h3>Gymnase<br />de Gilley</h3>
+              <address>Rue de la Gare<br />25650 Gilley</address>
+              <a href="https://www.google.com/maps/dir/?api=1&destination=47.05345%2C6.49163" target="_blank" rel="noreferrer">
+                Ouvrir l’itinéraire <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -239,7 +262,9 @@ const rules = [
           <div class="partners-grid">
             <div class="partner partner-logo"><img src="/images/partenaire-gaby.jpg" alt="Le Tuyé du Papy Gaby" loading="lazy" /></div>
             <div class="partner partner-logo"><img src="/images/partenaire-gilley.jpg" alt="Commune de Gilley" loading="lazy" /></div>
-            <div class="partner partner-name">Communauté<br />de Communes</div>
+            <div class="partner partner-logo partner-community">
+              <img src="/images/ccEntreDoubsEtLouee.png" alt="Communauté de communes Entre Doubs et Loue" loading="lazy" />
+            </div>
             <div class="partner partner-name">Partenaire<br />local</div>
           </div>
         </div>
@@ -251,10 +276,10 @@ const rules = [
             <p class="eyebrow eyebrow-light"><span></span> 18 septembre 2027</p>
             <h2>Prêt à sonner<br /><em>la cloche ?</em></h2>
           </div>
-          <a class="round-link" href="https://votre-plateforme-d-inscription.fr" target="_blank" rel="noreferrer">
+          <button class="round-link" type="button" data-open-registration>
             <span>S’inscrire<br />à la course</span>
             <b aria-hidden="true">↗</b>
-          </a>
+          </button>
         </div>
       </section>
     </main>
@@ -262,7 +287,7 @@ const rules = [
     <footer>
       <div class="container footer-grid">
         <a class="footer-brand" href="#accueil">
-          <img src="/images/logo-backyard.jpg" alt="Backyard du Haut-Doubs" width="160" height="93" loading="lazy" />
+          <img src="/images/logo-backyard-blanc.png" alt="Backyard du Haut-Doubs" width="412" height="270" loading="lazy" />
         </a>
         <p>Une boucle de 6,706 km.<br />Chaque heure. Jusqu’au dernier.</p>
         <div>
@@ -275,6 +300,22 @@ const rules = [
         <span>Gilley · France</span>
       </div>
     </footer>
+
+    <dialog class="rules-dialog live-dialog" id="liveDialog" aria-labelledby="live-title">
+      <div class="live-dialog-inner">
+        <button class="dialog-close" type="button" data-close-live aria-label="Fermer la fenêtre de suivi">×</button>
+        <p class="live-kicker"><span></span><b id="waitKicker">Suivi de la course</b></p>
+        <h2 id="live-title">Encore un peu<br />de patience.</h2>
+        <p class="live-message" id="waitMessage">La vue en direct de la course sera disponible dans :</p>
+        <div class="countdown live-countdown" aria-label="Temps restant avant l’ouverture du suivi en direct" aria-live="polite">
+          <div><strong data-countdown="days">000</strong><span>jours</span></div>
+          <div><strong data-countdown="hours">00</strong><span>heures</span></div>
+          <div><strong data-countdown="minutes">00</strong><span>minutes</span></div>
+          <div><strong data-countdown="seconds">00</strong><span>secondes</span></div>
+        </div>
+        <button class="button button-accent live-dialog-action" type="button" data-close-live>Retour au site</button>
+      </div>
+    </dialog>
 
     <dialog class="rules-dialog" id="rulesDialog" aria-labelledby="rules-title">
       <div class="dialog-top">
@@ -299,10 +340,10 @@ const rules = [
     <script>
       const targetDate = new Date('2027-09-18T09:00:00+02:00').getTime();
       const countdownElements = {
-        days: document.querySelector('#days'),
-        hours: document.querySelector('#hours'),
-        minutes: document.querySelector('#minutes'),
-        seconds: document.querySelector('#seconds')
+        days: document.querySelectorAll<HTMLElement>('[data-countdown="days"]'),
+        hours: document.querySelectorAll<HTMLElement>('[data-countdown="hours"]'),
+        minutes: document.querySelectorAll<HTMLElement>('[data-countdown="minutes"]'),
+        seconds: document.querySelectorAll<HTMLElement>('[data-countdown="seconds"]')
       };
 
       function updateCountdown() {
@@ -312,10 +353,10 @@ const rules = [
         const minutes = Math.floor((remaining % 3_600_000) / 60_000);
         const seconds = Math.floor((remaining % 60_000) / 1_000);
 
-        if (countdownElements.days) countdownElements.days.textContent = String(days).padStart(3, '0');
-        if (countdownElements.hours) countdownElements.hours.textContent = String(hours).padStart(2, '0');
-        if (countdownElements.minutes) countdownElements.minutes.textContent = String(minutes).padStart(2, '0');
-        if (countdownElements.seconds) countdownElements.seconds.textContent = String(seconds).padStart(2, '0');
+        countdownElements.days.forEach((element) => element.textContent = String(days).padStart(3, '0'));
+        countdownElements.hours.forEach((element) => element.textContent = String(hours).padStart(2, '0'));
+        countdownElements.minutes.forEach((element) => element.textContent = String(minutes).padStart(2, '0'));
+        countdownElements.seconds.forEach((element) => element.textContent = String(seconds).padStart(2, '0'));
       }
 
       updateCountdown();
@@ -349,6 +390,30 @@ const rules = [
       });
       dialog?.addEventListener('click', (event) => {
         if (event.target === dialog) dialog.close();
+      });
+
+      const liveDialog = document.querySelector<HTMLDialogElement>('#liveDialog');
+      const waitKicker = document.querySelector('#waitKicker');
+      const waitMessage = document.querySelector('#waitMessage');
+      document.querySelectorAll<HTMLElement>('[data-open-live]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (waitKicker) waitKicker.textContent = 'Suivi de la course';
+          if (waitMessage) waitMessage.textContent = 'La vue en direct de la course sera disponible dans :';
+          liveDialog?.showModal();
+        });
+      });
+      document.querySelectorAll<HTMLElement>('[data-open-registration]').forEach((button) => {
+        button.addEventListener('click', () => {
+          if (waitKicker) waitKicker.textContent = 'Inscriptions';
+          if (waitMessage) waitMessage.textContent = 'Le site d’inscription sera disponible dans :';
+          liveDialog?.showModal();
+        });
+      });
+      document.querySelectorAll<HTMLElement>('[data-close-live]').forEach((button) => {
+        button.addEventListener('click', () => liveDialog?.close());
+      });
+      liveDialog?.addEventListener('click', (event) => {
+        if (event.target === liveDialog) liveDialog.close();
       });
     </script>
   </body>
