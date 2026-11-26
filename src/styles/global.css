@@ -217,6 +217,9 @@ footer { padding-block: 50px 24px; color: #b7c8ba; background: #071f1a; }
 .footer-grid p { margin: 0; font-size: 12px; }
 .footer-grid > div { display: flex; justify-content: end; flex-wrap: wrap; gap: 24px; }
 .footer-grid > div a, .footer-grid button { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; color: white; background: transparent; font-size: 11px; text-decoration: none; }
+.footer-grid > div .footer-social-link { justify-content: center; width: 44px; height: 44px; border: 1px solid #ffffff40; border-radius: 50%; transition: color 180ms, border-color 180ms, background 180ms; }
+.footer-social-link:hover { border-color: var(--ochre-light); color: var(--pine-deep) !important; background: var(--ochre-light); }
+.footer-social-link svg { display: block; width: 18px; height: 18px; fill: currentColor; }
 .footer-grid button:disabled { color: #b7c8ba; }
 .footer-bottom { display: flex; justify-content: space-between; gap: 12px; margin-top: 34px; padding-top: 20px; border-top: 1px solid #ffffff21; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
 
