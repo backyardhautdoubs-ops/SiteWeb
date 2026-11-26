@@ -42,34 +42,10 @@ const rules = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script is:inline>
-      try {
-        if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('backyard-intro-seen') && !location.hash) {
-          document.documentElement.dataset.intro = 'play';
-          sessionStorage.setItem('backyard-intro-seen', '1');
-        }
-      } catch { /* The page remains immediately available if storage is disabled. */ }
-    </script>
     <title>Backyard du Haut-Doubs — Gilley</title>
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
-
-    <div class="intro-screen">
-      <div class="intro-mark" aria-hidden="true">
-        <div class="intro-orbit">
-          <svg viewBox="0 0 320 320" class="intro-loop">
-            <circle class="intro-loop-track" cx="160" cy="160" r="148" />
-            <circle class="intro-loop-progress" cx="160" cy="160" r="148" pathLength="1" />
-          </svg>
-          <img src="/images/logo-backyard-transparent.png" alt="" width="412" height="270" />
-          <span class="intro-lap">01 / ∞</span>
-        </div>
-        <p>Une boucle. <b>Tout commence.</b></p>
-        <span class="intro-location">Gilley · Haut-Doubs · 2027</span>
-      </div>
-      <button type="button" class="intro-skip" data-skip-intro>Passer l’intro <span aria-hidden="true">↗</span></button>
-    </div>
 
     <header class="site-header">
       <a class="brand" href="#accueil" aria-label="Backyard du Haut-Doubs — accueil">

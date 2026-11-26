@@ -1,20 +1,4 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const intro = document.querySelector<HTMLElement>('.intro-screen');
-function finishIntro() {
-  delete document.documentElement.dataset.intro;
-}
-intro?.addEventListener('animationend', (event) => {
-  if (event.target === intro) finishIntro();
-});
-document.querySelector('[data-skip-intro]')?.addEventListener('click', finishIntro);
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' || event.key === 'Tab') finishIntro();
-});
-// A fail-safe also releases the intro if an animation is interrupted.
-window.setTimeout(finishIntro, 1900);
-reducedMotion.addEventListener('change', (event) => {
-  if (event.matches) finishIntro();
-});
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
 const header = document.querySelector<HTMLElement>('.site-header');
