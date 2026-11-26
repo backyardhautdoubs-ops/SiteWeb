@@ -1,0 +1,26 @@
+---
+import Analytics from '@vercel/analytics/astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Backyard du Haut-Doubs à Gilley : une boucle de 6,706 km et 240 m D+ toutes les heures, jusqu’au dernier coureur debout." />
+    <meta name="theme-color" content="#123d37" />
+    <meta property="og:title" content="Backyard du Haut-Doubs" />
+    <meta property="og:description" content="Une boucle. Une heure. Jusqu’au dernier. Rendez-vous le 18 septembre 2027 à Gilley." />
+    <meta property="og:image" content="/images/parcours-haut-doubs.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>Backyard du Haut-Doubs — Gilley</title>
+  </head>
+  <body>
+    <slot />
+    <Analytics />
+  </body>
+</html>
