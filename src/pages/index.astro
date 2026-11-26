@@ -83,10 +83,9 @@ const rules = [
         <a href="#questions">FAQ</a>
         <a href="#sponsors">Sponsors</a>
       </nav>
-      <button class="header-cta" type="button" data-open-registration>
-        S’inscrire
-        <span aria-hidden="true">↗</span>
-      </button>
+      <a class="header-cta" href="https://inscription.pointcourse.com/epreuve/backyard-du-haut-doubs" target="_blank" rel="noreferrer">
+        S’inscrire <span aria-hidden="true">↗</span>
+      </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Ouvrir le menu"><span></span><span></span></button>
     </header>
 
@@ -105,12 +104,12 @@ const rules = [
             <p class="hero-lead">Une boucle. Une heure.<br /><em>Jusqu’au dernier.</em></p>
             <p class="hero-description">Les sapins pour décor. Le mental pour moteur.<br />Et toujours, une nouvelle raison de repartir.</p>
             <div class="hero-actions">
-              <button class="button button-accent" type="button" data-open-registration>
+              <a class="button button-accent" href="https://inscription.pointcourse.com/epreuve/backyard-du-haut-doubs" target="_blank" rel="noreferrer">
                 Prendre le départ <span aria-hidden="true">↗</span>
-              </button>
+              </a>
               <a class="button button-ghost" href="#concept">Découvrir le concept <span aria-hidden="true">↓</span></a>
             </div>
-            <p class="hero-registration-note">Inscriptions à venir · Préparez votre prochaine aventure.</p>
+            <p class="hero-registration-note">Ouverture des inscriptions le 6 décembre · Consultez PointCourse.</p>
           </div>
           <aside class="race-pass" aria-label="Votre rendez-vous à Gilley">
             <div class="pass-top"><span>Votre prochain départ</span><span class="edition-tag">Édition 01</span></div>
@@ -280,7 +279,7 @@ const rules = [
         <div class="container faq-layout">
           <div><p class="eyebrow"><span></span> Avant le premier tour</p><h2 id="faq-title">Le départ,<br /><em>l’esprit libre.</em></h2><p>Une autre question ?<br /><a href="mailto:backyardhautdoubs@gmail.com">Écrivez à l’organisation <span aria-hidden="true">↗</span></a></p></div>
           <div class="faq-list">
-            <details><summary>Comment s’inscrire ?<span aria-hidden="true">+</span></summary><p>La plateforme d’inscription n’est pas encore disponible. La date d’ouverture, les tarifs et les modalités seront annoncés ici. Pour toute question, contactez l’organisation à <a href="mailto:backyardhautdoubs@gmail.com">backyardhautdoubs@gmail.com</a>.</p></details>
+            <details><summary>Comment s’inscrire ?<span aria-hidden="true">+</span></summary><p>Les inscriptions ouvrent le 6 décembre. <a href="https://inscription.pointcourse.com/epreuve/backyard-du-haut-doubs" target="_blank" rel="noreferrer">Consultez la page d’inscription PointCourse</a> pour les informations et l’ouverture des inscriptions.</p></details>
             <details><summary>Faut-il courir pendant 24 heures ?<span aria-hidden="true">+</span></summary><p>Non, il n’y a pas de distance minimale à viser ni de durée fixée à l’avance. Vous repartez tant que vous terminez chaque boucle en moins d’une heure et êtes présent au départ suivant. Votre objectif vous appartient.</p></details>
             <details><summary>Comment se passent les pauses ?<span aria-hidden="true">+</span></summary><p>Le temps restant avant l’heure suivante est votre temps de récupération. Vous pouvez vous ravitailler et bénéficier de votre assistance dans la zone prévue, puis rejoindre le sas de départ avant le nouveau départ.</p></details>
             <details><summary>Quand le parcours sera-t-il disponible ?<span aria-hidden="true">+</span></summary><p>Le tracé sera communiqué avant l’épreuve. La boucle annoncée mesure 6,706 km avec 240 mètres de dénivelé positif, au départ du Gymnase de Gilley.</p></details>
@@ -341,11 +340,6 @@ const rules = [
         <p class="live-message">Le suivi en direct n’est pas encore disponible. Rendez-vous ici pour les informations de suivi de la première édition, le 18 septembre 2027.</p>
         <button class="button button-accent live-dialog-action" type="button" data-close-live>Retour au site</button>
       </div>
-    </dialog>
-
-    <dialog class="rules-dialog registration-dialog" id="registrationDialog" aria-labelledby="registration-title">
-      <div class="dialog-top"><p class="eyebrow"><span></span> Édition 01 · Gilley</p><button class="dialog-close" type="button" data-close-registration aria-label="Fermer les informations d’inscription">×</button></div>
-      <div class="registration-content"><span class="registration-symbol" aria-hidden="true">↗</span><h2 id="registration-title">Votre prochaine<br /><em>aventure arrive.</em></h2><p>Les inscriptions ne sont pas encore ouvertes. La date d’ouverture, les tarifs et le lien d’inscription seront annoncés sur ce site.</p><div class="registration-date"><span>Premier départ</span><strong>18 septembre 2027 · 06:00</strong></div><a class="button button-dark" href="mailto:backyardhautdoubs@gmail.com?subject=Informations%20inscription%20Backyard%202027">Contacter l’organisation <span aria-hidden="true">↗</span></a></div>
     </dialog>
 
     {rulesAvailable && <dialog class="rules-dialog" id="rulesDialog" aria-labelledby="rules-title">

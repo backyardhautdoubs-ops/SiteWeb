@@ -86,7 +86,7 @@ document.querySelectorAll<HTMLButtonElement>('[data-laps]').forEach(button => bu
 }));
 updateCalculator();
 
-for (const name of ['rules', 'registration', 'live']) {
+for (const name of ['rules', 'live']) {
   const dialog = document.querySelector<HTMLDialogElement>(`#${name}Dialog`);
   document.querySelectorAll(`[data-open-${name}]`).forEach(button => button.addEventListener('click', () => {
     setMenu(false);
